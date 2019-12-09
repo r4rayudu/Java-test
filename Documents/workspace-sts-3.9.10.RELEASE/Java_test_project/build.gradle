@@ -1,0 +1,47 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M5'
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+jar {
+  baseName = 'Java_test_project'
+  version = '1.0-SNAPSHOT'
+}
+
+compileTestJava {
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+}
+
+ext.junitPlatformVersion = '1.4.1'
+ext.junitJupiterVersion  = '5.0.2'
+
+junitPlatform {
+  platformVersion '1.4.1'
+}
+
+dependencies {
+
+    // JUnit Jupiter API and TestEngine implementation
+  	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+  	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+  
+  	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
+  	
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.1'
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+  	//testImplementation('org.hamcrest:hamcrest-library:2.1')
+
+}
